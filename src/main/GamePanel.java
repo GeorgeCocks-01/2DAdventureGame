@@ -19,7 +19,7 @@ public class GamePanel extends JPanel implements Runnable {
   final int screenWidth = tileSize * maxScreenCol; // 768 px
   final int screenHeight = tileSize * maxScreenRow; // 576 px
 
-  int FPS = 60; // Set FPS
+  double FPS = 144; // Set FPS
 
   KeyHandler keyH = new KeyHandler(); // create new key handler
 
@@ -28,7 +28,8 @@ public class GamePanel extends JPanel implements Runnable {
   // Set player's default position
   int playerX = 100;
   int playerY = 100;
-  int playerSpeed = 4;
+  double scaleFPS = 60.0/FPS; // scales movement speed to adjust for FPS
+  int playerSpeed = (int) (4*scaleFPS + 0.5); // Player's movement speed
 
   public GamePanel() {
     this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -46,18 +47,19 @@ public class GamePanel extends JPanel implements Runnable {
 
   @Override
   public void run() {
-
     // Timing variables for game loop
     double drawInterval = 1000000000/FPS;
     double delta = 0;
     double lastTime = System.nanoTime();
     long currentTime;
+    long timer = 0;
+    int drawCount = 0;
 
     while(gameThread != null) { // game loop
 
       currentTime = System.nanoTime(); // get time in nanoseconds
       delta += (currentTime - lastTime)/drawInterval;
-
+      timer += currentTime - lastTime;
       lastTime = currentTime;
 
       if(delta >= 1) {
@@ -66,6 +68,13 @@ public class GamePanel extends JPanel implements Runnable {
         // 2. draw screen with updated information
         repaint(); // calls paintComponent method (predefined java method)
         delta--;
+        drawCount++;
+      }
+
+      if(timer >= 1000000000) {
+        System.out.println("FPS: " + drawCount);
+        drawCount = 0;
+        timer = 0;
       }
     }
   }
