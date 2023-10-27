@@ -1,7 +1,13 @@
 {
-    "java.project.sourcePaths": ["src"],
+    "java.project.sourcePaths": [
+      "src",
+      "res"
+    ],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
         "lib/**/*.jar"
-    ]
+    ],
+    "java.dependency.packagePresentation": "hierarchical",
+    "java.project.explorer.showNonJavaResources": true,
+    "java.dependency.syncWithFolderExplorer": true
 }
