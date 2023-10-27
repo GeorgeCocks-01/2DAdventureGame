@@ -98,8 +98,6 @@ public class Player extends Entity {
 
     BufferedImage image = null;
 
-    System.out.println(moving);
-
     if(moving == true) {
       switch(direction) {
         case "forward":
