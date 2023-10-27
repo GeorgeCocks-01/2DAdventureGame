@@ -12,6 +12,7 @@ public class Entity {
     backward2, left, left1, right, right1;
 
   public String direction;
+  public boolean moving;
 
   public int spriteCounter = 0;
   public int spriteNum = 1;
