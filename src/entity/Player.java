@@ -66,6 +66,20 @@ public class Player extends Entity {
       direction = "right";
       x += speed;
     }
+
+    spriteCounter++;
+    if(spriteCounter > 24) { // Instead of every 10 frames at 60FPS
+      if(spriteNum == 1) {
+        spriteNum = 2;
+      } else if(spriteNum == 2) {
+        spriteNum = 3;
+      } else if(spriteNum == 3) {
+        spriteNum = 4;
+      } else if(spriteNum == 4) {
+        spriteNum = 1;
+      }
+      spriteCounter = 0;
+    }
   }
 
   public void draw(Graphics2D g2) {
@@ -76,17 +90,59 @@ public class Player extends Entity {
 
     switch(direction) {
       case "forward":
-        image = forward;
+        if(spriteNum == 1) {
+          image = forward;
+        } else if(spriteNum == 2) {
+          image = forward1;
+        } else if(spriteNum == 3) {
+          image = forward;
+        } else if(spriteNum == 4) {
+          image = forward2;
+        }
         break;
       case "backward":
-        image = backward;
+        if(spriteNum == 1) {
+          image = backward;
+        } else if(spriteNum == 2) {
+          image = backward1;
+        } else if(spriteNum == 3) {
+          image = backward;
+        } else if(spriteNum == 4) {
+          image = backward2;
+        }
         break;
       case "left":
-        image = left;
+        if(spriteNum == 1) {
+          image = left;
+        } else if(spriteNum == 2) {
+          image = left1;
+        } else if(spriteNum == 3) {
+          image = left;
+        } else if(spriteNum == 4) {
+          image = left1;
+        }
         break;
       case "right":
-        image = right;
+        if(spriteNum == 1) {
+          image = right;
+        } else if(spriteNum == 2) {
+          image = right1;
+        } else if(spriteNum == 3) {
+          image = right;
+        } else if(spriteNum == 4) {
+          image = right1;
+        }
         break;
+      default:
+        if(image == forward1 || image == forward2) {
+          image = forward;
+        } else if(image == backward1 || image == backward2) {
+          image = backward;
+        } else if(image == left || image == left1) {
+          image = left;
+        } else if(image == right || image == right1) {
+          image = right;
+        }
     }
 
     g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null); // image observer = null
