@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 /* Parent/Super class for all players, monsters and NPCs */
 public class Entity {
 
-  public int x, y;
+  public int worldX, worldY;
   public int speed;
 
   public BufferedImage forward, forward1, forward2, backward, backward1,

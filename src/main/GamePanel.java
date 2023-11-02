@@ -10,7 +10,7 @@ import entity.Player;
 import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
-  // screen settings
+  // SCREEN SETTINGS
   final int originalTileSize = 16; // in px, default size
   final int scale = 3; // scales up tile (originalTileSize*scale)
   // 48 px tile size. Public as accessed from Player.java
@@ -20,12 +20,18 @@ public class GamePanel extends JPanel implements Runnable {
   public final int screenWidth = tileSize * maxScreenCol; // 768 px
   public final int screenHeight = tileSize * maxScreenRow; // 576 px
 
+  // WORLD SETTINGS
+  public final int maxWorldCol = 50;
+  public final int maxWorldRow = 50;
+  public final int worldWidth = tileSize*maxWorldCol;
+  public final int worldHeight = tileSize*maxWorldRow;
+
   int FPS = 144; // Set FPS
 
   TileManager tm = new TileManager(this);
   KeyHandler keyH = new KeyHandler(); // create new key handler
   Thread gameThread;
-  Player player = new Player(this, keyH); // create new player
+  public Player player = new Player(this, keyH); // create new player
 
   public GamePanel() {
     this.setPreferredSize(new Dimension(screenWidth, screenHeight));
